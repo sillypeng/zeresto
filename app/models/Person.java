@@ -29,5 +29,9 @@ public class Person extends Model{
 	public static List<Person> findAll() {
 		return all().fetch();
 	}
-
+	
+	public static List<Person> findById(long id) {
+		return all().filter("id", id).fetch();
+	}
+	
 }

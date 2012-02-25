@@ -1,4 +1,16 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+Hello world
+
+<form action="@{Application.hello()}" method="get" data-ajax="false" >
+			
+				
+		Nom : <input type="text" name="name"	id="name"  />
+				
+					
+		<input type="submit" value="Login" data-theme="b"/>
+					
+					
+</form>
+
