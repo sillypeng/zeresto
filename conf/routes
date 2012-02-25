@@ -5,6 +5,10 @@
 # Home page
 GET     /                                       Application.index
 
+#Website
+GET     /website								MainSite.index
+                               
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
