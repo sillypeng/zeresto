@@ -33,4 +33,8 @@ public class Relation extends Model{
 	public static List<Relation> findAll() {
 		return all().fetch();
 	}
+	
+	public static Relation findById(long id) {
+		return all().filter("id", id).get();
+	}
 }

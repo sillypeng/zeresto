@@ -4,6 +4,7 @@ import java.util.List;
 
 import siena.Generator;
 import siena.Id;
+import siena.Join;
 import siena.Model;
 import siena.Query;
 
@@ -34,5 +35,9 @@ public class Evaluation {
 
 	public static List<Evaluation> findAll() {
 		return all().fetch();
+	}
+	
+	public static Evaluation findById(long id) {
+		return all().filter("id", id).get();
 	}
 }

@@ -30,8 +30,8 @@ public class Person extends Model{
 		return all().fetch();
 	}
 	
-	public static List<Person> findById(long id) {
-		return all().filter("id", id).fetch();
+	public static Person findById(long id) {
+		return all().filter("id", id).get();
 	}
 	
 }

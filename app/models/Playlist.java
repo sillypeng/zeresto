@@ -7,7 +7,7 @@ import siena.Id;
 import siena.Model;
 import siena.Query;
 
-public class Playlist {
+public class Playlist extends Model{
 	
 	@Id(Generator.AUTO_INCREMENT)
 	public Long id;
@@ -30,9 +30,16 @@ public class Playlist {
 		return all().fetch();
 	}
 	
+	public static Playlist findById(long playlistId) {
+		return all().filter("id", playlistId).get();
+	}
+	
 	public static List<Playlist> findByFollower(Person person) {
 		return all().filter("followers", person).fetch();
 	}
 	
+	public static List<Playlist> findByOwner(Person owner) {
+		return all().filter("owner", owner).fetch();
+	}
 
 }
