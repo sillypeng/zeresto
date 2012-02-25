@@ -12,6 +12,9 @@ public class Application extends Controller {
     public static void index() {
         render();
     }
+    public static void add() {
+        render();
+    }
     
     public static void hello(String name) {
     	

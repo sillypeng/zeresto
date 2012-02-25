@@ -14,13 +14,15 @@ public class Place extends Model{
 	@Id(Generator.AUTO_INCREMENT)
 	public Long id;
 	
+	public String name;
+	
 	@Geocells
 	public List<String> areas;
 	
 	public double lat;
 	
 	public double lng;
-
+	
 	public boolean revoked;
 	
 	public String address;
@@ -31,14 +33,18 @@ public class Place extends Model{
 	
 	public double averagePrice;
 	
-	public String creationDate;
+	public long creationDate;
 	
-	public String modificationDate;
+	public long modificationDate;
 	
 	public String website;
 	
 	public static Query<Place> all() {
 		return Model.all(Place.class);
+	}
+	
+	public static Place findById(long id) {
+		return all().filter("id", id).get();
 	}
 
 	public static List<Place> findAll() {

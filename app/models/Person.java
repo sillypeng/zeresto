@@ -14,6 +14,8 @@ public class Person extends Model{
 	
 	public String email;
 	
+	public String nom;
+	
 	public long lastConnectionDate;
 	
 	public long creationDate;
@@ -32,6 +34,10 @@ public class Person extends Model{
 	
 	public static Person findById(long id) {
 		return all().filter("id", id).get();
+	}
+	
+	public static Person findByEmail(String email) {
+		return all().filter("email", email).get();
 	}
 	
 }

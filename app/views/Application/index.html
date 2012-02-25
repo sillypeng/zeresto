@@ -1,12 +1,12 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-Hello world
+<h3>Hello world</h3>
 
-<form action="@{Application.hello()}" method="get" data-ajax="false" >
+<form action="@{Application.addPerson()}" method="get" data-ajax="false" >
 			
 				
-		Nom : <input type="text" name="name"	id="name"  />
+		Email : <input type="text" name="person.email"	id="name"  />
 				
 					
 		<input type="submit" value="Login" data-theme="b"/>

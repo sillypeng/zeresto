@@ -6,6 +6,8 @@ import play.mvc.*;
 
 import java.util.*;
 
+import com.beoui.geocell.GeocellManager;
+import com.beoui.geocell.model.Point;
 import com.google.gson.Gson;
 
 import models.*;
@@ -13,12 +15,22 @@ import models.*;
 public class Api extends Controller{
 	
 	public static void addPerson (Person person){
+		
+		if(Person.findByEmail(person.email)!=null)
+			error(400, Code.USER_EMAIL_ALREADY_EXIST);
+		
 		person.creationDate=System.currentTimeMillis();
 		person.revoked=false;
 		person.nbConnection=0;
 		person.lastConnectionDate=System.currentTimeMillis();
 		person.save();
 		renderJSON(person);
+	}
+	
+	public static void listPersons (){
+		
+		
+		renderJSON(Person.findAll());
 	}
 	
 	public static void test(String json){
@@ -30,7 +42,22 @@ public class Api extends Controller{
 	}
 	
 	public static void addPlace (Place place){
+		
+		place.areas=GeocellManager.generateGeoCell(new Point(place.lat,place.lng));
+		place.creationDate=System.currentTimeMillis();
+		place.revoked=false;
+		
 		place.save();
+		renderJSON(place);
+	}
+	
+	public static void removePlace (long placeId){
+		Place place=Place.findById(placeId);
+		
+		place.revoked=true;
+		place.modificationDate=System.currentTimeMillis();
+		
+		place.update();
 		renderJSON(place);
 	}
 	
@@ -46,16 +73,49 @@ public class Api extends Controller{
 			evaluations.add(Evaluation.findById(evaluationId));
 		
 		playlist.evaluations=evaluations;
+		playlist.deleted=false;
 		
-		playlist.save();
+		playlist.insert();
 		
 		renderJSON(playlist);
 	}
+	
+	public static void removePlaylist(long playlistId, long evaluationId){
+		Playlist playlist=Playlist.findById(playlistId);
+		
+		playlist.deleted=true;
+		
+		playlist.save();
+		renderJSON(playlist);
+	}
+	
 	
 	public static void addPlaylistEvaluation (long playlistId, long evaluationId){
 		Playlist playlist=Playlist.findById(playlistId);
 		
 		
+		List<Evaluation> list=playlist.evaluations;
+		if(list==null){
+			list=new ArrayList<Evaluation>(1);
+			playlist.evaluations=list;
+		}
+		list.add(Evaluation.findById(evaluationId));
+		
+		playlist.update();
+		renderJSON(playlist);
+	}
+	
+
+	
+	public static void deletePlaylistEvaluation (long playlistId, long evaluationId){
+		Playlist playlist=Playlist.findById(playlistId);
+		
+		List<Evaluation> list=playlist.evaluations;
+		if(list!=null){
+			list.remove(Evaluation.findById(evaluationId));
+			playlist.update();
+		}
+		renderJSON(playlist);
 	}
 	
 	

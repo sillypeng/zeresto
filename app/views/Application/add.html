@@ -1,0 +1,16 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+
+<h3>Person</h3>
+
+<form action="@{Api.addPerson()}" method="get" data-ajax="false" >
+			
+				
+		Email : <input type="text" name="person.email"	id="email"  /><br>
+		Name : <input type="text" name="person.name"	id="name"  /><br>
+					
+		<input type="submit" value="Login" data-theme="b"/>
+					
+					
+</form>
