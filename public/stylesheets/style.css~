@@ -241,7 +241,7 @@
 }
 
 .footer-height{
-	top: 1150px;
+	top: 1170px;
 }
 
 #footer-background{
@@ -253,4 +253,13 @@
 	z-index: 0;
 }
 
+#sendButton{
+	margin-top:8px;
+	margin-left:286px;
+	width:82px;
+	height:32px;
+	background:url(/public/images/button.png);
+	background-repeat:no-repeat;
+	cursor: pointer;
+}
 
